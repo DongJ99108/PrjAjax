@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 
 @WebServlet("/product")
-@MultipartConfig
+@MultipartConfig // 파일도 포함해서 보낸다는 설정을 추가하는 명령어
 public class Product extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -57,6 +57,8 @@ public class Product extends HttpServlet {
 		out.print( json );
 		out.flush();
 		out.close();
+		
+		System.out.println( map );
 	}
 
 	// 회원 등록
@@ -70,7 +72,7 @@ public class Product extends HttpServlet {
 		map.put(name, language);
 		
 		System.out.println( name + "이 추가되었습니다." );
-		
+		System.out.println( map );
 	}
 
 }

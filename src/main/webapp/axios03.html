@@ -6,12 +6,18 @@
 </head>
 <body>
   <h2>회원 등록</h2>
+  <!-- <form method="post" enctype="multipart/form-data"> -->
   <input type="text" id="name"     value="장원영" />
   <input type="text" id="language" value="ive" />
+  
   <button id="add">회원 등록</button>
+  <!-- </form> -->
   <div id="div1"></div>
+  
   <hr />
+  
   <h2>회원 조회</h2>
+  
   <input type="text" id="name2"    value="장원영" />
   <button id="get">회원 조회</button>
   <div id="div2"></div>
@@ -29,6 +35,7 @@
 	    const languageEl = document.querySelector('#language')
     	const url        = 'http://localhost:8080/product';
     	
+	    // 서버에 전달될 인잢 : post 방식임
     	const formData   = new FormData();
     	formData.append("name",     nameEl.value)
     	formData.append("language", languageEl.value)
@@ -36,10 +43,12 @@
     	
     	const config = {
     		header : {
-    			"content-type" : "multipart/form-data"
+    			"content-type" : "multipart/form-data" // 텍스트가 아닌 파일의 형태로 전송
     		}
     	}
-    	return axios.post(url, formData, config);
+    	// 서버에 @MultipartConfig 필수
+    	
+    	return axios.post( url, formData, config );
     }
   
   

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>busanbook</title>
+<style>
+  ul {
+    border: 1px solid black;
+    border-radius : 5px;
+    margin : 10px;
+  }
+</style>
+</head>
+<body>
+  <h2>부산광역시 주간 인기 대출 도서</h2>
+  인기 대출 도서 조회<input type="number" id="page" value="1" min="1" max="maxpage" />
+  <button>검색</button>
+  <div id="output"></div>
+  <script>
+    const pageEl   = document.querySelector('#page')
+    const btnEl    = document.querySelector('button')
+    const outputEl = document.querySelector('#output')
+    
+    // 버튼이 클릭되었을때
+    btnEl.addEventListener('click', function() {
+    	let url = 'http://apis.data.go.kr/6260000/BookLoanBestService/getBookLoanBest'
+    	url    += '?ServiceKey=ae7ab1e82502f9c722460414ed0a031e41d2dc3fb60eaf7f1365df3594f3f250'
+    	url    += '&numOfRows=10'
+    	url    += '&pageNo='+pageEl.value
+    	url    += '&resultType=json'
+    	fetch (url)
+    		.then( response => response.json() )
+    		.then( json => {
+    			console.log(json)
+    			
+    			
+    			let itemList    = json.response.body.items.item
+    			let totalCount  = parseInt(json.response.body.totalCount)
+    			let numOfRows   = parseInt(json.response.body.numOfRows)
+    			let maxPage     = Math.ceil(totalCount / numOfRows)
+    			pageEl.max = maxPage
+    			console.log("totalCount : " + totalCount)
+    			console.log("numOfRows : " + numOfRows)
+    			console.log("maxPage : " + maxPage)
+    			console.log(itemList)
+    			
+    			dataDisplay(itemList)
+    			
+    		})
+    		.catch (error => console.log(error))
+    }) // btnEl click function end
+    
+    function dataDisplay(itemList) {
+    	let html = ''
+    	itemList.forEach( function( item, i ) {
+    		html += `
+    			<ul>
+    				<li>저자명 : ${item.author}</li>
+    				<li>대출횟수 : ${item.cnt}</li>
+    				<li>표지이미지 : <img src="${item.image}"</li>
+    				<li>소장도서관명 : ${item.lib_name}</li>
+    				<li>발행년도 : ${item.publish_year}</li>
+    				<li>발행자 : ${item.publisher}</li>
+    				<li>순위 : ${item.rank}</li>
+    				<li>자료실명 : ${item.shelf_loc_name}</li>
+    				<li>표제 : ${item.title}</li>
+    			</ul>
+    		`
+    	} ) // forEach End
+    	outputEl.innerHTML = html
+    } // dataDisplay function end
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
