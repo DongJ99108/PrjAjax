@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="signup-container">
+        <h1>회원가입</h1>
+        <p class="subtitle">회원이 되어 다양한 혜택을 경험해 보세요!</p>
+
+        <form id="signupForm">
+            <!-- 아이디 -->
+            <div class="input-group">
+                <label>아이디 <span class="error-msg">사용할 수 없는 아이디입니다.</span></label>
+                <div class="with-button">
+                    <input type="text" placeholder="아이디 입력 (6~20자)" required>
+                    <button type="button" class="btn-check">중복 확인</button>
+                </div>
+            </div>
+
+            <!-- 비밀번호 -->
+            <div class="input-group">
+                <label>비밀번호 <span class="error-msg">20자 이내의 비밀번호를 입력해주세요.</span></label>
+                <input type="password" placeholder="비밀번호 입력 (문자, 숫자, 특수문자 포함 8~20자)" required>
+            </div>
+
+            <div class="input-group">
+                <label>비밀번호 확인 <span class="error-msg">비밀번호가 일치하지 않습니다.</span></label>
+                <input type="password" placeholder="비밀번호 재입력" required>
+            </div>
+
+            <!-- 개인정보 -->
+            <div class="input-group">
+                <label>이름</label>
+                <input type="text" placeholder="이름을 입력해주세요" required>
+            </div>
+
+            <div class="input-group">
+                <label>전화번호</label>
+                <input type="tel" placeholder="휴대폰 번호 입력 ('-' 제외 11자리 입력)" required>
+            </div>
+
+            <div class="input-group">
+                <label>이메일 주소</label>
+                <div class="email-row">
+                    <input type="text" placeholder="이메일 주소">
+                    <span>@</span>
+                    <select>
+                        <option>naver.com</option>
+                        <option>gmail.com</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>생년월일</label>
+                <div class="birth-row">
+                    <select><option>년도</option></select>
+                    <select><option>월</option></select>
+                    <select><option>일</option></select>
+                </div>
+            </div>
+
+            <!-- 하단 버튼 -->
+            <div class="button-group">
+                <button type="submit" class="btn-submit">가입하기</button>
+                <button type="button" class="btn-cancel">가입취소</button>
+            </div>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

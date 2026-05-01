@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+</style>
+
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script>
+  /*
+    $.ajax()
+    $.get()
+    $.post()
+    $.getJSON()
+    $.load()
+  */
+  $( function() {
+	  let url = 'https://jsonplaceholder.typicode.com/posts'
+	  // > Get Data List
+	  $('button').eq(0).on('click', function() {
+		  // alert('ok')
+		  $.ajax( {
+			  url : url // 앞의 url은 속성이고 뒤의 url은 변수다
+			  
+		  } )
+		  .done( function( posts ) {
+			  // console.log( posts )
+			  let html = ''
+			  $.each(posts, function( index, post ) {
+				  console.log( post )
+				  html += `
+				  	<ul>
+				  	  <li>userId : ${post.userId}</li>
+				  	  <li>id     : ${post.id    }</li>
+				  	  <li>title  : ${post.title }</li>
+				  	  <li>body   : ${post.body  }</li>
+				  	</ul>
+				  `
+			  })
+			  
+			  $('#output').html( html )
+			  
+		  } )
+		  .fail( function( error ) {
+			  console.log( error )
+		  } )
+	  }) // Get Data List
+	  
+	  $('button').eq(1).on('click', function() {
+		  // Get Data (Get)
+		  // PathVariable -> Get 방식만 가능하다.
+		  let url2 = 'https://jsonplaceholder.typicode.com/posts/2' // posts/2 에서 2의 의미가 get 방식으로 데이터를 전송하는 것이기 때문에 $.post로 코드를 짠다고한들 작동이 안됨
+		  $.get( url2, function( result ) {
+			  console.log( result )
+			  alert( result.id + result.title )
+		  } )
+	  
+	  })
+	  
+	  
+	  
+  } )
+</script>
+</head>
+<body>
+  <h2>JQuery Ajax 03</h2>
+  <button>Get Data List</button>
+  <button>Get Data (Get)</button>
+  <div id="output"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
